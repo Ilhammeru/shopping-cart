@@ -1,0 +1,32 @@
+{
+    "site": {
+        "name": "Shopping Cart",
+        "meta": {
+            "title": "Shopping Cart - Toko Online Serba Ada Anda",
+            "description": "Rasakan pengalaman belanja online yang mulus dengan Shopping Cart. Jelajahi, pilih, dan beli produk favorit Anda dengan mudah."
+        }
+    },
+    "auth": {
+        "welcomeBack": "Selamat Datang Kembali!",
+        "signInToDashboard": "Masuk ke akun Anda untuk mengakses dasbor.",
+        "email": "Alamat Email",
+        "password": "Kata Sandi",
+        "forgotPassword": "Lupa kata sandi Anda?",
+        "rememberMe": "Ingat saya",
+        "signIn": "Masuk",
+        "noAccount": "Belum punya akun?",
+        "signUp": "Daftar",
+        "createYourNewAccount": "Buat akun baru Anda",
+        "createYourNewAccountDescription": "Bergabunglah dengan Shopping Cart hari ini dan mulailah menjelajahi dunia produk di ujung jari Anda.",
+        "alreadyHaveAnAccount": "Sudah punya akun?"
+    },
+    "common": {
+        "login": "Masuk",
+        "register": "Daftar",
+        "email":"Alamat Email",
+        "password": "Kata Sandi",
+        "dontHaveAnAccount": "Belum punya akun?",
+        "createOneNow": "Buat Sekarang",
+        "username": "Nama Pengguna"
+    }
+}

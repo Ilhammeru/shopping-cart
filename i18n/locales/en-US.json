@@ -1,0 +1,32 @@
+{
+  "site": {
+    "name": "Shopping Cart",
+    "meta": {
+      "title": "Shopping Cart - Your One-Stop Online Shop",
+      "description": "Experience seamless online shopping with Shopping Cart. Browse, select, and purchase your favorite products with ease."
+    }
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back!",
+    "signInToDashboard": "Sign in to your account to access the dashboard.",
+    "email": "Email Address",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "rememberMe": "Remember me",
+    "signIn": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "createYourNewAccount": "Create your new account",
+    "createYourNewAccountDescription": "Join Shopping Cart today and start exploring a world of products at your fingertips.",
+    "alreadyHaveAnAccount": "Already have an account?"
+  },
+  "common": {
+    "login": "Sign In",
+    "register": "Register",
+    "email":"Email Address",
+    "password": "Password",
+    "dontHaveAnAccount": "Don't have an account?",
+    "createOneNow": "Create One Now",
+    "username": "Username"
+  }
+}
