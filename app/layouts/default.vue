@@ -1,6 +1,7 @@
 <!-- layouts/default.vue -->
 <script setup lang="ts">
 import type { LanguageListDto } from '~/types/language-list';
+import navbar from '~/layouts/components/navbar.vue';
 
 const { t, locale, setLocale } = useI18n();
 const route = useRoute();
@@ -8,16 +9,18 @@ const route = useRoute();
 // Check if we're on dashboard pages
 const isDashboardPage = computed(() => 
   route.path.startsWith('/dashboard') || 
+  route.path.startsWith('/product') || 
+  route.path.startsWith('/cart') || 
   route.path.startsWith('/owner') || 
   route.path.startsWith('/employee')
 );
 
 // Dark mode state
 const colorMode = useColorMode();
-const isDark = computed({
-  get: () => colorMode.value === 'dark',
-  set: (value) => colorMode.value = value ? 'dark' : 'light'
-});
+
+const toggleDarkMode = () => {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+};
 
 // Language selection
 const languages: LanguageListDto[] = [
@@ -51,12 +54,17 @@ const switchLanguage = async (langCode: 'en-US' | 'id') => {
           <div class="flex items-center gap-3">
             <!-- Dark Mode Toggle -->
             <button
-              @click="isDark = !isDark"
               class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300"
-              :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+              :aria-label="colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+              @click="toggleDarkMode"
             >
-              <Icon v-if="isDark" name="heroicons:sun" class="w-5 h-5" />
-              <Icon v-else name="heroicons:moon" class="w-5 h-5" />
+              <ClientOnly>
+                <Icon v-if="colorMode.value === 'dark'" name="heroicons:sun" class="w-5 h-5" />
+                <Icon v-else name="heroicons:moon" class="w-5 h-5" />
+                <template #fallback>
+                  <Icon name="heroicons:moon" class="w-5 h-5" />
+                </template>
+              </ClientOnly>
             </button>
 
             <!-- Language Selector Dropdown -->
@@ -76,9 +84,9 @@ const switchLanguage = async (langCode: 'en-US' | 'id') => {
                 <div class="w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1">
                   <div v-for="lang in languages" :key="lang.code">
                     <button
-                      @click="switchLanguage(lang.code)"
                       class="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
                       :class="{ 'bg-blue-50 dark:bg-gray-700': locale === lang.code }"
+                      @click="switchLanguage(lang.code)"
                     >
                       <span class="text-lg">{{ lang.flag }}</span>
                       <span class="text-gray-700 dark:text-gray-300">{{ lang.name }}</span>
@@ -130,9 +138,9 @@ const switchLanguage = async (langCode: 'en-US' | 'id') => {
           </div>
           
           <div class="flex items-center gap-6 mb-8">
-            <NuxtLink to="/privacy" class="text-gray-600 dark:text-gray-400 hover:text-primary-blue">Privacy Policy</NuxtLink>
-            <NuxtLink to="/terms" class="text-gray-600 dark:text-gray-400 hover:text-primary-blue">Terms of Service</NuxtLink>
-            <NuxtLink to="/contact" class="text-gray-600 dark:text-gray-400 hover:text-primary-blue">Contact</NuxtLink>
+            <NuxtLink to="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-blue">Privacy Policy</NuxtLink>
+            <NuxtLink to="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-blue">Terms of Service</NuxtLink>
+            <NuxtLink to="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-blue">Contact</NuxtLink>
           </div>
           
           <p class="text-sm text-gray-500 dark:text-gray-500">
@@ -143,9 +151,42 @@ const switchLanguage = async (langCode: 'en-US' | 'id') => {
     </footer>
   </div>
 
-  <!-- Dashboard Layout (handled by dashboard components) -->
-  <div v-else>
-    <slot />
+  <!-- Dashboard Layout -->
+  <div v-else class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- Dashboard Header -->
+    <navbar />
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8 mt-12">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+              <Icon name="heroicons:sparkles" class="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h2 class="font-bold text-lg text-gray-900 dark:text-white">CarCart</h2>
+              <p class="text-xs text-gray-600 dark:text-gray-400">Your Shopping Partner</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
+            <NuxtLink to="#" class="hover:text-blue-600 dark:hover:text-blue-400">Help Center</NuxtLink>
+            <NuxtLink to="#" class="hover:text-blue-600 dark:hover:text-blue-400">Privacy</NuxtLink>
+            <NuxtLink to="#" class="hover:text-blue-600 dark:hover:text-blue-400">Terms</NuxtLink>
+          </div>
+          
+          <p class="text-sm text-gray-500 dark:text-gray-500">
+            © {{ new Date().getFullYear() }} CarCart. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -171,5 +212,15 @@ const switchLanguage = async (langCode: 'en-US' | 'id') => {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-300 dark:bg-gray-600 rounded hover:bg-gray-400 dark:hover:bg-gray-500;
+}
+
+/* Hide scrollbar for category navigation */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 </style>

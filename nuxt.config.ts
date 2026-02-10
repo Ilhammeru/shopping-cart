@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  //ssr:false,
-  compatibilityDate: "2025-07-15",
+  // ssr:false,
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
@@ -110,7 +109,6 @@ export default defineNuxtConfig({
 
   cookieControl: {
     cookieExpiryOffsetMs: 1000 * 60 * 60 * 24 * 365, // one year
-    // set all these to true for highest GDPR enforcement
     isAcceptNecessaryButtonEnabled: true,
     isModalForced: false,
     isCookieIdVisible: true,

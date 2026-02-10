@@ -8,7 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   };
 
   // Handle promise rejections
-  if (process.client) {
+  if (import.meta.client) {
     window.addEventListener('unhandledrejection', (event) => {
       console.error('[Unhandled Promise Rejection]', event.reason);
       handleError(event.reason);

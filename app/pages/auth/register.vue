@@ -5,12 +5,17 @@
     <div class="fixed top-4 right-4 flex gap-2 z-50">
       <!-- Dark Mode Toggle -->
       <button
-        @click="toggleDarkMode"
         class="p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
         :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+        @click="toggleDarkMode"
       >
-        <Icon v-if="isDark" name="heroicons:sun" class="w-5 h-5" />
-        <Icon v-else name="heroicons:moon" class="w-5 h-5" />
+        <ClientOnly>
+          <Icon v-if="isDark" name="heroicons:sun" class="w-5 h-5" />
+          <Icon v-else name="heroicons:moon" class="w-5 h-5" />
+          <template #fallback>
+            <Icon name="heroicons:moon" class="w-5 h-5" />
+          </template>
+        </ClientOnly>
       </button>
 
       <!-- Language Selector -->
@@ -24,9 +29,9 @@
           <button
             v-for="lang in languages"
             :key="lang.code"
-            @click="switchLanguage(lang.code)"
             class="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
             :class="{ 'bg-blue-50 dark:bg-gray-700': currentLanguage?.code === lang.code }"
+            @click="switchLanguage(lang.code)"
           >
             <span class="text-lg">{{ lang.flag }}</span>
             <span class="text-gray-700 dark:text-gray-300 text-sm">{{ lang.name }}</span>
@@ -53,7 +58,7 @@
       <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 transition-colors">
 
         <!-- Form -->
-        <form @submit="handleRegister" class="space-y-5">
+        <form class="space-y-5" @submit="handleRegister">
           <!-- Username -->
           <FormVInput
             name="username"
@@ -98,8 +103,8 @@
             <template #suffix>
               <button 
                 type="button"
-                @click="showPassword = !showPassword"
                 class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                @click="showPassword = !showPassword"
               >
                 <Icon :name="showPassword ? 'heroicons:eye-slash' : 'heroicons:eye'" class="w-5 h-5" />
               </button>
@@ -109,9 +114,11 @@
           <!-- Submit Button -->
           <button
             type="submit"
-            class="w-full bg-gradient-primary text-white font-semibold py-3 px-4 rounded-lg hover:opacity-90 transition-opacity"
+            :disabled="isLoading"
+            class="w-full bg-gradient-primary text-white font-semibold py-3 px-4 rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {{ $t("common.register") }}
+            <Icon v-if="isLoading" name="heroicons:arrow-path" class="w-5 h-5 animate-spin" />
+            <span>{{ isLoading ? 'Signing up...' : $t("common.register") }}</span>
           </button>
         </form>
 
@@ -138,12 +145,13 @@ definePageMeta({
   layout: 'auth',
 });
 
+const toast = useToast();
+const { register } = useAuth();
 const { handleApiError } = useErrorHandler();
 
 const showPassword = ref(false);
 const isLoading = ref(false)
 
-// Use VeeValidate's useForm composable
 const { handleSubmit } = useForm({
   validationSchema: registerSchema,
 });
@@ -179,14 +187,14 @@ const handleRegister = handleSubmit(async (values) => {
   try {
     const payload = values as unknown as RegisterPayloadDto;
 
-    await (payload);
+    await register(payload);
     
     toast.success('Login successful!', 'Redirecting to dashboard...');
     
     // TODO: Navigate to dashboard based on user role
-    // await navigateTo('/dashboard');
+    await navigateTo('/dashboard');
     
-  } catch (error: any) {
+  } catch (error) {
     handleApiError(error, 'Login Failed');
   } finally {
     isLoading.value = false;

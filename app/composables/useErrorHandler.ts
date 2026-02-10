@@ -1,10 +1,3 @@
-interface ErrorResponse {
-  statusCode?: number;
-  statusMessage?: string;
-  message?: string;
-  data?: any;
-}
-
 export const useErrorHandler = () => {
   const config = useRuntimeConfig();
   const toast = useToast();
@@ -18,7 +11,7 @@ export const useErrorHandler = () => {
   /**
    * Get user-friendly error message based on environment
    */
-  const getUserFriendlyMessage = (error: any): string => {
+  const getUserFriendlyMessage = (error: any) => {
     // If in development, show actual error
     if (isDevelopment.value) {
       return getActualErrorMessage(error);
@@ -60,7 +53,7 @@ export const useErrorHandler = () => {
   /**
    * Extract actual error message from various error formats
    */
-  const getActualErrorMessage = (error: any): string => {
+  const getActualErrorMessage = (error: any) => {
     // Try different error message locations
     if (error?.data?.message) return error.data.message;
     if (error?.message) return error.message;
@@ -74,7 +67,7 @@ export const useErrorHandler = () => {
   /**
    * Get error title based on status code
    */
-  const getErrorTitle = (error: any): string => {
+  const getErrorTitle = (error: any) => {
     const statusCode = error?.statusCode || error?.response?.status;
     
     switch (statusCode) {

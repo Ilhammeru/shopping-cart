@@ -27,6 +27,33 @@
     "password": "Password",
     "dontHaveAnAccount": "Don't have an account?",
     "createOneNow": "Create One Now",
-    "username": "Username"
+    "username": "Username",
+    "searchProducts": "Search products...",
+    "profile": "Profile",
+    "orders": "Orders",
+    "settings": "Settings",
+    "logout": "Logout",
+    "seeAllCategories": "See All Categories",
+    "whatDoYouWantToBuyToday": "What do you want to buy today?",
+    "ourProducts": "Our Products",
+    "noProductsFound": "No products found.",
+    "addToCart": "Add to Cart",
+    "viewDetails": "View Details",
+    "shoppingCart": "Shopping Cart",
+    "clearCart": "Clear Cart",
+    "yourCartIsEmpty": "Your cart is empty.",
+    "continueShopping": "Continue Shopping",
+    "startShoppingToAddMoreItems": "Start shopping to add more items to your cart.",
+    "proceedToCheckout": "Proceed to Checkout"
+  },
+  "cookies": {
+    "modal": {
+      "title": "We use cookies!",
+      "description": "This website uses cookies to ensure you get the best experience on our website.",
+      "privacy-policy": "Privacy Policy"
+    }
+  },
+  "locale": {
+    "dir": "auto"
   }
 }

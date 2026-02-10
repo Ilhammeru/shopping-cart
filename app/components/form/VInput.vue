@@ -11,11 +11,11 @@
       
       <VeeField
         :id="name"
+        v-slot="{ field, errorMessage }"
         :name="name"
         :type="type"
         :placeholder="placeholder"
         :disabled="disabled"
-        v-slot="{ field, errorMessage }"
       >
         <input
           v-bind="field"
@@ -28,7 +28,7 @@
             icon ? 'pl-10 pr-4' : 'px-4',
             disabled ? 'bg-gray-100 cursor-not-allowed' : ''
           ]"
-        />
+          >
       </VeeField>
       
       <slot name="suffix" />
@@ -53,8 +53,12 @@ interface Props {
   icon?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   type: 'text',
+  label: '',
+  placeholder: '',
+  description: '',
+  icon: '',
   required: false,
   disabled: false,
 });

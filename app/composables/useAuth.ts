@@ -16,17 +16,26 @@ export const useAuth = () => {
       user.value = response.user;
       return response;
     } catch (error) {
+      console.log('Login error:', error);
       throw error;
     }
   };
 
   const register = async (payload: RegisterPayloadDto) => {
     try {
-      const response = await $fetch(`api/`)
+      const response = await $fetch(`/api/register`, {
+        method: 'POST',
+        body: payload,
+        credentials: 'include'
+      });
+
+      user.value = (response as any).user;
+      return response;
     } catch (error) {
-      
+      console.log('Registration error:', error);
+      throw error;
     }
-  }
+  };
 
   const logout = async () => {
     try {
@@ -50,6 +59,7 @@ export const useAuth = () => {
       user.value = response.user;
     } catch (error) {
       user.value = null;
+      console.log('[err', error);
     }
   };
 
@@ -57,6 +67,7 @@ export const useAuth = () => {
 
   return {
     user,
+    register,
     login,
     logout,
     fetchUser,

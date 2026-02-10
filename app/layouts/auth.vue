@@ -6,6 +6,4 @@
 </template>
 
 <script setup lang="ts">
-// Ensure color mode is initialized
-const colorMode = useColorMode();
 </script>

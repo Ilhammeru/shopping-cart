@@ -27,6 +27,33 @@
         "password": "Kata Sandi",
         "dontHaveAnAccount": "Belum punya akun?",
         "createOneNow": "Buat Sekarang",
-        "username": "Nama Pengguna"
+        "username": "Nama Pengguna",
+        "searchProducts": "Cari produk...",
+        "profile": "Profil",
+        "orders": "Pesanan",
+        "settings": "Pengaturan",
+        "logout": "Keluar",
+        "seeAllCategories": "Lihat Semua Kategori",
+        "whatDoYouWantToBuyToday": "Apa yang ingin Anda beli hari ini?",
+        "ourProducts": "Produk Kami",
+        "noProductsFound": "Tidak ada produk yang ditemukan.",
+        "addToCart": "Tambah ke Keranjang",
+        "viewDetails": "Lihat Detail",
+        "shoppingCart": "Keranjang Belanja",
+        "clearCart": "Bersihkan Keranjang",
+        "yourCartIsEmpty": "Keranjang Anda kosong.",
+        "continueShopping": "Lanjutkan Belanja",
+        "startShoppingToAddMoreItems": "Mulailah berbelanja untuk menambahkan lebih banyak item ke keranjang Anda.",
+        "proceedToCheckout": "Lanjutkan ke Pembayaran"
+    },
+    "cookies": {
+        "modal": {
+            "title": "Kami menggunakan cookie!",
+            "description": "Situs web ini menggunakan cookie untuk memastikan Anda mendapatkan pengalaman terbaik di situs kami.",
+            "privacy-policy": "Kebijakan Privasi"
+        }
+    },
+    "locale": {
+        "dir": "auto"
     }
 }

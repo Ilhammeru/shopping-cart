@@ -13,6 +13,7 @@
     "start": "node .output/server/index.mjs",
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext .ts,.js,.vue .",
+    "lint:fix": "eslint --ext .ts,.js,.vue . --fix",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write . --fix"
   },

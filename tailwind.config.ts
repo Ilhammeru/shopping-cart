@@ -1,15 +1,15 @@
-import { type Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 export default {
   // content: ["./src/**/*.{html,js}"],
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Inter"],
+      sans: ["Helvetica Neue", "sans-serif"],
       serif: ["serif"],
       mono: ["monospace"],
-      display: ["Inter"],
-      body: ["Inter"],
+      display: ["Helvetica Neue", "sans-serif"],
+      body: ["Helvetica Neue", "sans-serif"],
     },
     extend: {
       spacing: {

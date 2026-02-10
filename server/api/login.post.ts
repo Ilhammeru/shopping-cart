@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
 
     const body = await readBody(event);
     
-    // Call external API
+    // Call real url of fakestoreapi
     const data: any = await $fetch(`${config.apiBaseUrl}/auth/login`, {
         method: 'POST',
         body,
@@ -11,8 +11,6 @@ export default defineEventHandler(async (event) => {
             'Content-Type': 'application/json'
         }
     });
-
-    console.log('data', data);
 
     // If login successful and token exists, set HTTP-only cookie
     if (data.token) {
