@@ -95,19 +95,23 @@ const switchLanguage = async (langCode: 'en-US' | 'id') => {
                     </div>
 
                     <!-- Theme Toggle -->
-                    <button
-                        class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
-                        :aria-label="colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
-                        @click="toggleDarkMode"
-                        >
-                        <ClientOnly>
-                            <Icon v-if="colorMode.value === 'dark'" name="heroicons:sun" class="w-5 h-5" />
-                            <Icon v-else name="heroicons:moon" class="w-5 h-5" />
-                            <template #fallback>
+                    <ClientOnly>
+                        <template #default>
+                            <button
+                                class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                :aria-label="colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+                                @click="toggleDarkMode"
+                            >
+                                <Icon v-if="colorMode.value === 'dark'" name="heroicons:sun" class="w-5 h-5" />
+                                <Icon v-else name="heroicons:moon" class="w-5 h-5" />
+                            </button>
+                        </template>
+                        <template #fallback>
+                            <span class="p-2 rounded-lg text-gray-600 dark:text-gray-300 inline-block">
                                 <Icon name="heroicons:moon" class="w-5 h-5" />
-                            </template>
-                        </ClientOnly>
-                    </button>
+                            </span>
+                        </template>
+                    </ClientOnly>
 
                     <!-- Cart Icon -->
                     <NuxtLink 

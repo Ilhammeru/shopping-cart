@@ -7,7 +7,7 @@ export const useAuth = () => {
 
   const login = async (credentials: LoginPayloadDto) => {
     try {
-      const data = await $fetch('/api/login', {
+      const data = await $fetch('/api/auth/login', {
         method: 'POST',
         body: credentials,
         credentials: 'include'
@@ -23,7 +23,7 @@ export const useAuth = () => {
 
   const register = async (payload: RegisterPayloadDto) => {
     try {
-      const response = await $fetch(`/api/register`, {
+      const response = await $fetch(`/api/auth/register`, {
         method: 'POST',
         body: payload,
         credentials: 'include'
@@ -39,7 +39,7 @@ export const useAuth = () => {
 
   const logout = async () => {
     try {
-      await $fetch('/api/logout', {
+      await $fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include'
       });

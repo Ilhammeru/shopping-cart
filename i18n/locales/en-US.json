@@ -51,6 +51,10 @@
       "title": "We use cookies!",
       "description": "This website uses cookies to ensure you get the best experience on our website.",
       "privacy-policy": "Privacy Policy"
+    },
+    "bar": {
+      "title": "We use cookies to improve your experience.",
+      "description": "By using our site, you agree to our use of cookies."
     }
   },
   "locale": {

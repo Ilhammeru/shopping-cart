@@ -5,7 +5,8 @@ const colorMode = useColorMode();
 const isLoading = ref(true);
 
 if (import.meta.client) {
-  const storedLanguage = localStorage.getItem("nuxt-lang");
+  const storedLanguage = useCookie("nuxt-lang", { default: () => "" }).value;
+  // const storedLanguage = localStorage.getItem("nuxt-lang");
   if (storedLanguage && storedLanguage !== "en-US") {
     locale.value = storedLanguage;
   }
@@ -50,7 +51,9 @@ useSeoMeta({
      />
     <NuxtLayout>
       <div>
-        <CookieBanner />
+        <ClientOnly> <!-- this is to resolve issue about hydration mismatch in the browser console -->
+          <CookieBanner />
+        </ClientOnly>
         <NuxtPage />
       </div>
     </NuxtLayout>

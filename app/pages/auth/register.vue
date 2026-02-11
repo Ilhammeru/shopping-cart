@@ -4,19 +4,23 @@
     <!-- Header with Theme/Language Toggle - Fixed to top right -->
     <div class="fixed top-4 right-4 flex gap-2 z-50">
       <!-- Dark Mode Toggle -->
-      <button
-        class="p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
-        :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-        @click="toggleDarkMode"
-      >
-        <ClientOnly>
-          <Icon v-if="isDark" name="heroicons:sun" class="w-5 h-5" />
-          <Icon v-else name="heroicons:moon" class="w-5 h-5" />
-          <template #fallback>
+      <ClientOnly>
+        <template #default>
+          <button
+            class="p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+            :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+            @click="toggleDarkMode"
+          >
+            <Icon v-if="isDark" name="heroicons:sun" class="w-5 h-5" />
+            <Icon v-else name="heroicons:moon" class="w-5 h-5" />
+          </button>
+        </template>
+        <template #fallback>
+          <span class="p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 inline-block">
             <Icon name="heroicons:moon" class="w-5 h-5" />
-          </template>
-        </ClientOnly>
-      </button>
+          </span>
+        </template>
+      </ClientOnly>
 
       <!-- Language Selector -->
       <div class="relative group">

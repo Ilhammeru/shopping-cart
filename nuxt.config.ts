@@ -40,6 +40,15 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
     logLevel: 4,
+    // Global API route rules for proxy optimization
+    routeRules: {
+      '/api/**': { 
+        cors: true,
+        headers: {
+          'cache-control': 's-maxage=0, must-revalidate'
+        }
+      }
+    }
   },
   tailwindcss: {
     cssPath: "~/assets/css/tailwind.css",
@@ -75,16 +84,17 @@ export default defineNuxtConfig({
     },
   },
 
-  // Enable route rules for prerendering
+  // Enable route rules for prerendering and caching
   routeRules: {
     '/': { prerender: true },
-    '/dashboard': { swr: 3600 }, // Cache for 1 hour with SWR
+    '/dashboard': { swr: 3600 }, 
+    '/api/product': { swr: 60 },  // shorter cache lifetime
+    '/api/product/**': { swr: 60 }, 
   },
 
-  // Experimental features for better performance
   experimental: {
     payloadExtraction: true,
-    inlineSSRStyles: false,
+    inlineSSRStyles: true,  // Inline critical CSS for faster FCP/LCP
     renderJsonPayloads: true,
   },
 
@@ -105,11 +115,12 @@ export default defineNuxtConfig({
 
   googleFonts: {
     families: {
-      Inter: true,
+      Inter: [400, 600, 700],  // Only load needed weights
     },
     display: "swap",
     prefetch: true,
     preconnect: true,
+    download: true,  // Self-host fonts for faster loading
   },
 
   i18n: {

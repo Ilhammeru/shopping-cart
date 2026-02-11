@@ -51,6 +51,10 @@
             "title": "Kami menggunakan cookie!",
             "description": "Situs web ini menggunakan cookie untuk memastikan Anda mendapatkan pengalaman terbaik di situs kami.",
             "privacy-policy": "Kebijakan Privasi"
+        },
+        "bar": {
+            "title": "Kami menggunakan cookie untuk meningkatkan pengalaman Anda.",
+            "description": "Dengan menggunakan situs kami, Anda menyetujui penggunaan cookie kami."
         }
     },
     "locale": {
