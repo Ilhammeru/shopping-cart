@@ -7,14 +7,14 @@ export const useAuth = () => {
 
   const login = async (credentials: LoginPayloadDto) => {
     try {
-      const response = await $fetch('/api/login', {
+      const data = await $fetch('/api/login', {
         method: 'POST',
         body: credentials,
         credentials: 'include'
       });
 
-      user.value = response.user;
-      return response;
+      user.value = data.token;
+      return data;
     } catch (error) {
       console.log('Login error:', error);
       throw error;
@@ -53,7 +53,7 @@ export const useAuth = () => {
 
   const fetchUser = async () => {
     try {
-      const response: any = await $fetch('/api/auth/me', {
+      const response: any = await useFetch('/api/auth/me', {
         credentials: 'include'
       });
       user.value = response.user;

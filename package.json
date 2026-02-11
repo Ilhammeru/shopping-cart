@@ -8,6 +8,7 @@
     "dev": "nuxt dev",
     "dev-https": "nuxt dev --https --ssl-cert certs/localhost.pem --ssl-key certs/localhost-key.pem",
     "generate": "nuxt generate",
+    "preview": "nuxt preview",
     "preview-https": "NITRO_SSL_CERT=`cat certs/localhost.pem` NITRO_SSL_KEY=`cat certs/localhost-key.pem` node .output/server/index.mjs",
     "preview:static": "npx serve .output/public",
     "start": "node .output/server/index.mjs",

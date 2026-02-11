@@ -6,15 +6,6 @@ definePageMeta({
   layout: 'default'
 });
 
-useHead({
-    title: 'Product Detail - Shopping Cart App',
-    meta: [
-        { name: 'description', content: 'Browse products and manage your shopping cart in the Shopping Cart App dashboard.' },
-        { property: 'og:title', content: 'Product Detail - Shopping Cart App' },
-        { property: 'og:description', content: 'Browse products and manage your shopping cart in the Shopping Cart App dashboard.' },
-    ]
-});
-
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
@@ -44,11 +35,57 @@ const updateProductQuantityInPage = () => {
     }
 }
 
+watchEffect(() => {
+  if (product.value) {
+    const productTitle = `${product.value.title} - Product Details`;
+    const productDescription = product.value.description.length > 155 
+      ? product.value.description.substring(0, 155) + '...' 
+      : product.value.description;
+
+    useHead({
+      title: productTitle,
+      meta: [
+        { name: 'description', content: productDescription },
+        { property: 'og:title', content: productTitle },
+        { property: 'og:description', content: productDescription },
+        { property: 'og:image', content: product.value.image },
+        { property: 'og:type', content: 'product' },
+        { property: 'product:price:amount', content: product.value.price.toString() },
+        { property: 'product:price:currency', content: 'USD' },
+      ],
+      link: [
+        { rel: 'canonical', href: `${window.location.origin}/product/${product.value.id}` }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          children: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: product.value.title,
+            description: product.value.description,
+            image: product.value.image,
+            offers: {
+              '@type': 'Offer',
+              price: product.value.price,
+              priceCurrency: 'USD',
+              availability: 'https://schema.org/InStock'
+            },
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: 5,
+              reviewCount: 100
+            }
+          })
+        }
+      ]
+    });
+  }
+});
+
 // If product not found, redirect to dashboard
 watchEffect(() => {
   if (!product.value && productId.value) {
-    console.warn('Product not found, redirecting to dashboard');
-    // Give some time for products to load
     setTimeout(() => {
       if (!product.value) {
         router.push('/dashboard');

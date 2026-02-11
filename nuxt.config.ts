@@ -64,7 +64,28 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }
+      ],
+      meta: [
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'theme-color', content: '#3b82f6' }
+      ]
     },
+  },
+
+  // Enable route rules for prerendering
+  routeRules: {
+    '/': { prerender: true },
+    '/dashboard': { swr: 3600 }, // Cache for 1 hour with SWR
+  },
+
+  // Experimental features for better performance
+  experimental: {
+    payloadExtraction: true,
+    inlineSSRStyles: false,
+    renderJsonPayloads: true,
   },
 
   colorMode: {

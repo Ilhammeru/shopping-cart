@@ -26,10 +26,15 @@ const handleAddToCart = (event: Event) => {
 <template>
   <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 flex flex-col h-full cursor-pointer" @click="viewDetails">
     <div class="relative h-48 w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
-      <img 
+      <NuxtImg 
         :src="image" 
-        :alt="title" 
+        :alt="`${title} - ${category}`" 
         class="w-full h-full object-cover"
+        loading="lazy"
+        width="400"
+        height="300"
+        format="webp"
+        quality="80"
         />
     </div>
     

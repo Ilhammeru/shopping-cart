@@ -29,6 +29,16 @@ useHead({
   titleTemplate(title) {
     return title ? `${title} - ${t("site.name")}` : `${t("site.name")}`;
   },
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+  ]
+});
+
+useSeoMeta({
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  robots: 'index, follow',
+  themeColor: '#3b82f6'
 });
 </script>
 

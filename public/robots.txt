@@ -1,2 +1,9 @@
 User-agent: *
 Allow: /
+Allow: /dashboard
+Allow: /product/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /cart/
+
+Sitemap: {{baseUrl}}/sitemap.xml
